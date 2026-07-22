@@ -21,5 +21,6 @@ def test_cli_lifecycle(monkeypatch, tmp_path: Path, capsys) -> None:
 
     assert main(["pause"]) == 0
     assert main(["forget", "--yes"]) == 0
+    assert main(["restore", str(export_path)]) == 0
     assert main(["status"]) == 0
-    assert "Samples: 0" in capsys.readouterr().out
+    assert "Samples: 2" in capsys.readouterr().out

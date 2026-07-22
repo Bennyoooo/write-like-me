@@ -73,6 +73,7 @@ wlm learn file.txt         # learn from a document
 wlm pause                  # stop new capture
 wlm resume                 # resume capture
 wlm export profile.json    # export redacted samples and metrics
+wlm restore profile.json   # restore an exported profile
 wlm forget --yes           # delete every learned sample
 ```
 

@@ -12,6 +12,7 @@ from .capture import capture
 from .config import Config, load_config, save_config
 from .hooks import extract_prompt
 from .paths import home
+from .privacy import normalize, redact
 from .storage import Store
 
 
@@ -48,6 +49,9 @@ def build_parser() -> argparse.ArgumentParser:
 
     export = sub.add_parser("export", help="export redacted samples and profile as JSON")
     export.add_argument("path", type=Path)
+
+    restore = sub.add_parser("restore", help="restore samples from a Write Like Me export")
+    restore.add_argument("path", type=Path)
 
     forget = sub.add_parser("forget", help="delete all learned samples")
     forget.add_argument("--yes", action="store_true")
@@ -128,6 +132,33 @@ def main(argv: list[str] | None = None) -> int:
         payload = {"version": 1, "profile": analyze(store.texts()), "samples": store.rows()}
         args.path.write_text(json.dumps(payload, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
         print(f"Exported {len(payload['samples'])} samples to {args.path}.")
+        return 0
+    if args.command == "restore":
+        config = load_config()
+        if not config.initialized:
+            print("Run `wlm init` first.", file=sys.stderr)
+            return 1
+        try:
+            payload = json.loads(args.path.read_text(encoding="utf-8"))
+            rows = payload["samples"]
+            if payload.get("version") != 1 or not isinstance(rows, list):
+                raise ValueError("unsupported export format")
+        except (OSError, json.JSONDecodeError, KeyError, TypeError, ValueError) as error:
+            print(f"Cannot restore {args.path}: {error}", file=sys.stderr)
+            return 1
+        store = Store()
+        restored = 0
+        for row in rows:
+            if not isinstance(row, dict) or not isinstance(row.get("text"), str):
+                continue
+            text = normalize(row["text"])[: config.max_chars]
+            text, labels = redact(text) if config.redact_secrets else (text, [])
+            source = str(row.get("source", "export"))[:100]
+            channel = str(row.get("channel", "imported"))
+            if channel not in {"typed", "spoken", "imported"}:
+                channel = "imported"
+            restored += int(store.add(text, f"restore:{source}", channel, labels, config.max_samples))
+        print(f"Restored {restored} samples.")
         return 0
     if args.command == "forget":
         if not args.yes and input("Delete every learned sample? [y/N] ").strip().lower() not in {"y", "yes"}:

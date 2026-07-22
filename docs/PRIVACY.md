@@ -27,6 +27,7 @@ wlm status
 wlm pause
 wlm resume
 wlm export profile.json
+wlm restore profile.json
 wlm forget --yes
 ```
 
