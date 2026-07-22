@@ -1,4 +1,4 @@
-from write_like_me.analyze import analyze, profile_markdown
+from write_like_me.analyze import analyze, context_markdown, profile_markdown
 
 
 def test_analysis_extracts_voice_traits() -> None:
@@ -17,3 +17,10 @@ def test_analysis_extracts_voice_traits() -> None:
 def test_empty_profile_has_helpful_message() -> None:
     assert "No writing samples" in profile_markdown(analyze([]))
 
+
+def test_context_includes_bounded_reference_excerpts() -> None:
+    sample = "This is how I tend to explain a decision clearly and directly."
+    context = context_markdown(analyze([sample]), [sample])
+    assert "Reference excerpts" in context
+    assert sample in context
+    assert "style evidence" in context

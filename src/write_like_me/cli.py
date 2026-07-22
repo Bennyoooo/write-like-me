@@ -7,7 +7,7 @@ from dataclasses import asdict
 from pathlib import Path
 
 from . import __version__
-from .analyze import analyze, profile_markdown
+from .analyze import analyze, context_markdown, profile_markdown
 from .capture import capture
 from .config import Config, load_config, save_config
 from .hooks import extract_prompt
@@ -28,6 +28,10 @@ def build_parser() -> argparse.ArgumentParser:
     capture_parser.add_argument("--source", default="manual")
     capture_parser.add_argument("--channel", choices=("typed", "spoken", "imported"), default="typed")
     capture_parser.add_argument("--quiet", action="store_true")
+
+    learn = sub.add_parser("learn", help="learn from writing files or speech transcripts")
+    learn.add_argument("paths", nargs="+", type=Path)
+    learn.add_argument("--channel", choices=("typed", "spoken", "imported"), default="imported")
 
     hook = sub.add_parser("hook", help="capture a prompt from an agent hook on stdin")
     hook.add_argument("--agent", default="auto")
@@ -85,12 +89,25 @@ def main(argv: list[str] | None = None) -> int:
         except Exception:
             pass
         return 0
+    if args.command == "learn":
+        captured = 0
+        for path in args.paths:
+            try:
+                result = capture(path.read_text(encoding="utf-8"), source=f"file:{path.name}", channel=args.channel)
+            except OSError as error:
+                print(f"{path}: {error}", file=sys.stderr)
+                continue
+            print(f"{path}: {result.reason}")
+            captured += int(result.captured)
+        return 0 if captured else 1
     if args.command in {"profile", "context"}:
-        profile = _profile()
+        texts = Store().texts()
+        profile = analyze(texts)
         if args.as_json:
             print(json.dumps(profile, indent=2, ensure_ascii=False))
         else:
-            print(profile_markdown(profile), end="")
+            rendered = context_markdown(profile, texts) if args.command == "context" else profile_markdown(profile)
+            print(rendered, end="")
         return 0
     if args.command == "status":
         config = load_config()
