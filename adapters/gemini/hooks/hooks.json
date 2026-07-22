@@ -1,0 +1,18 @@
+{
+  "description": "Capture submitted prompts for the local writing voice profile.",
+  "hooks": {
+    "BeforeAgent": [
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "name": "write-like-me-capture",
+            "type": "command",
+            "command": "${extensionPath}/scripts/capture-prompt.sh gemini",
+            "timeout": 5000
+          }
+        ]
+      }
+    ]
+  }
+}

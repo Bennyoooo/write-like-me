@@ -1,0 +1,4 @@
+interface:
+  display_name: "Write Like Me"
+  short_description: "Draft in your learned writing voice"
+  default_prompt: "Write this in my voice using my local style profile."

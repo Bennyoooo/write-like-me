@@ -1,18 +1,30 @@
 {
   "name": "write-like-me",
   "version": "0.1.0",
-  "description": "Write Like Me plugin",
+  "description": "Learn your writing voice locally and help agents draft in your style.",
   "author": {
-    "name": "Local developer"
+    "name": "Benny Jiang",
+    "url": "https://github.com/bennyjiang"
   },
+  "homepage": "https://github.com/bennyjiang/write-like-me",
+  "repository": "https://github.com/bennyjiang/write-like-me",
+  "license": "MIT",
+  "keywords": ["writing", "voice", "personalization", "local-first"],
   "skills": "./skills/",
   "interface": {
     "displayName": "Write Like Me",
-    "shortDescription": "Use Write Like Me in Codex.",
-    "longDescription": "Write Like Me adds a local Codex plugin scaffold.",
-    "developerName": "Local developer",
+    "shortDescription": "Draft in your learned writing voice.",
+    "longDescription": "Write Like Me learns from the prompts you choose to capture, builds a private local voice profile, and helps Codex write in your style.",
+    "developerName": "Benny Jiang",
     "category": "Productivity",
-    "capabilities": [],
-    "defaultPrompt": "Help me use Write Like Me."
+    "capabilities": ["Interactive", "Write"],
+    "websiteURL": "https://github.com/bennyjiang/write-like-me",
+    "defaultPrompt": [
+      "Write this in my voice",
+      "Rewrite this so it sounds like me",
+      "Show me my writing voice profile"
+    ],
+    "brandColor": "#287271",
+    "screenshots": []
   }
 }

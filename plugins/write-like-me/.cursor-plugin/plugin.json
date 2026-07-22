@@ -1,0 +1,13 @@
+{
+  "name": "write-like-me",
+  "displayName": "Write Like Me",
+  "version": "0.1.0",
+  "description": "Learn your writing voice locally and help agents draft in your style.",
+  "author": {
+    "name": "Benny Jiang",
+    "url": "https://github.com/bennyjiang"
+  },
+  "homepage": "https://github.com/bennyjiang/write-like-me",
+  "repository": "https://github.com/bennyjiang/write-like-me",
+  "license": "MIT"
+}

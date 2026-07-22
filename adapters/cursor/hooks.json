@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "hooks": {
+    "beforeSubmitPrompt": [
+      {
+        "command": "$HOME/.write-like-me/runtime/bin/wlm hook --agent cursor",
+        "timeout": 5,
+        "failClosed": false
+      }
+    ]
+  }
+}
