@@ -1,7 +1,7 @@
 {
-  "name": "personal",
+  "name": "write-like-me",
   "interface": {
-    "displayName": "Personal"
+    "displayName": "Write Like Me"
   },
   "plugins": [
     {

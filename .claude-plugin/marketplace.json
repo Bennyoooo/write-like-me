@@ -1,0 +1,24 @@
+{
+  "name": "write-like-me",
+  "owner": {
+    "name": "Benny Jiang",
+    "url": "https://github.com/bennyjiang"
+  },
+  "metadata": {
+    "description": "Local-first writing voice memory for AI agents",
+    "version": "0.1.0"
+  },
+  "plugins": [
+    {
+      "name": "write-like-me",
+      "description": "Learn your writing voice locally and draft in your style.",
+      "author": {
+        "name": "Benny Jiang",
+        "url": "https://github.com/bennyjiang"
+      },
+      "homepage": "https://github.com/bennyjiang/write-like-me",
+      "tags": ["writing", "voice", "personalization", "local-first"],
+      "source": "./plugins/write-like-me"
+    }
+  ]
+}
