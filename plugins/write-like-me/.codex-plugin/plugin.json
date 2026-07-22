@@ -4,10 +4,10 @@
   "description": "Learn your writing voice locally and help agents draft in your style.",
   "author": {
     "name": "Benny Jiang",
-    "url": "https://github.com/bennyjiang"
+    "url": "https://github.com/Bennyoooo"
   },
-  "homepage": "https://github.com/bennyjiang/write-like-me",
-  "repository": "https://github.com/bennyjiang/write-like-me",
+  "homepage": "https://github.com/Bennyoooo/write-like-me",
+  "repository": "https://github.com/Bennyoooo/write-like-me",
   "license": "MIT",
   "keywords": ["writing", "voice", "personalization", "local-first"],
   "skills": "./skills/",
@@ -18,7 +18,7 @@
     "developerName": "Benny Jiang",
     "category": "Productivity",
     "capabilities": ["Interactive", "Write"],
-    "websiteURL": "https://github.com/bennyjiang/write-like-me",
+    "websiteURL": "https://github.com/Bennyoooo/write-like-me",
     "defaultPrompt": [
       "Write this in my voice",
       "Rewrite this so it sounds like me",

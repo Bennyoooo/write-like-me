@@ -14,7 +14,7 @@ Write Like Me learns from the prompts, documents, and speech transcripts you cho
 ## Quick Start
 
 ```bash
-git clone https://github.com/bennyjiang/write-like-me.git
+git clone https://github.com/Bennyoooo/write-like-me.git
 cd write-like-me
 ./scripts/install.sh --agent auto
 ```

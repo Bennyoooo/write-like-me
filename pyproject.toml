@@ -26,9 +26,9 @@ wlm = "write_like_me.cli:main"
 dev = ["build>=1.2", "pytest>=8"]
 
 [project.urls]
-Homepage = "https://github.com/bennyjiang/write-like-me"
-Repository = "https://github.com/bennyjiang/write-like-me"
-Issues = "https://github.com/bennyjiang/write-like-me/issues"
+Homepage = "https://github.com/Bennyoooo/write-like-me"
+Repository = "https://github.com/Bennyoooo/write-like-me"
+Issues = "https://github.com/Bennyoooo/write-like-me/issues"
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/write_like_me"]
