@@ -35,3 +35,4 @@ packages = ["src/write_like_me"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
+pythonpath = [".", "src"]
