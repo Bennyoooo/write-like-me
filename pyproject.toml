@@ -22,6 +22,9 @@ classifiers = [
 [project.scripts]
 wlm = "write_like_me.cli:main"
 
+[project.optional-dependencies]
+dev = ["build>=1.2", "pytest>=8"]
+
 [project.urls]
 Homepage = "https://github.com/bennyjiang/write-like-me"
 Repository = "https://github.com/bennyjiang/write-like-me"
@@ -32,4 +35,3 @@ packages = ["src/write_like_me"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
-
