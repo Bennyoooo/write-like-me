@@ -98,7 +98,12 @@ def install_opencode() -> None:
     target = config_home / "opencode/plugins/write-like-me.js"
     target.parent.mkdir(parents=True, exist_ok=True)
     shutil.copy2(ROOT / "adapters/opencode/write-like-me.js", target)
+    skill_target = config_home / "opencode/skills/write-like-me"
+    if skill_target.exists():
+        shutil.rmtree(skill_target)
+    shutil.copytree(ROOT / "plugins/write-like-me/skills/write-like-me", skill_target)
     print(f"installed opencode adapter: {target}")
+    print(f"installed opencode skill: {skill_target}")
 
 
 def install_cursor() -> None:
@@ -127,7 +132,12 @@ def install_cursor() -> None:
     temporary = target.with_suffix(".tmp")
     temporary.write_text(json.dumps(current, indent=2) + "\n", encoding="utf-8")
     temporary.replace(target)
+    skill_target = Path.home() / ".cursor/skills/write-like-me"
+    if skill_target.exists():
+        shutil.rmtree(skill_target)
+    shutil.copytree(ROOT / "plugins/write-like-me/skills/write-like-me", skill_target)
     print(f"merged cursor hook: {target}")
+    print(f"installed cursor skill: {skill_target}")
 
 
 def parse_args() -> argparse.Namespace:
@@ -140,7 +150,7 @@ def parse_args() -> argparse.Namespace:
 def main() -> int:
     args = parse_args()
     selected = args.agent or ["auto"]
-    install_runtime(args.yes)
+    wlm = install_runtime(args.yes)
     if "all" in selected:
         selected_agents = list(AGENTS)
     elif "auto" in selected:
@@ -157,7 +167,7 @@ def main() -> int:
     for agent in selected_agents:
         installers[agent]()
     print("\nInstalled for: " + ", ".join(selected_agents))
-    print("Run `~/.write-like-me/runtime/bin/wlm status` to inspect capture state.")
+    print(f"Run `{wlm} status` to inspect capture state.")
     return 0
 
 

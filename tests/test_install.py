@@ -18,6 +18,7 @@ def test_cursor_install_preserves_existing_hooks(monkeypatch, tmp_path: Path) ->
     assert payload["hooks"]["stop"] == [{"command": "existing"}]
     assert len(payload["hooks"]["beforeSubmitPrompt"]) == 1
     assert "wlm hook --agent cursor" in payload["hooks"]["beforeSubmitPrompt"][0]["command"]
+    assert (tmp_path / ".cursor/skills/write-like-me/SKILL.md").exists()
 
 
 def test_detects_opencode_config(monkeypatch, tmp_path: Path) -> None:
