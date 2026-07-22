@@ -1,0 +1,18 @@
+{
+  "name": "write-like-me",
+  "version": "0.1.0",
+  "description": "Write Like Me plugin",
+  "author": {
+    "name": "Local developer"
+  },
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Write Like Me",
+    "shortDescription": "Use Write Like Me in Codex.",
+    "longDescription": "Write Like Me adds a local Codex plugin scaffold.",
+    "developerName": "Local developer",
+    "category": "Productivity",
+    "capabilities": [],
+    "defaultPrompt": "Help me use Write Like Me."
+  }
+}
