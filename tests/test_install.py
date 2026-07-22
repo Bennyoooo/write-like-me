@@ -23,5 +23,6 @@ def test_cursor_install_preserves_existing_hooks(monkeypatch, tmp_path: Path) ->
 
 def test_detects_opencode_config(monkeypatch, tmp_path: Path) -> None:
     monkeypatch.setenv("HOME", str(tmp_path))
+    monkeypatch.setenv("XDG_CONFIG_HOME", str(tmp_path / ".config"))
     (tmp_path / ".config/opencode").mkdir(parents=True)
     assert install.detected("opencode")
